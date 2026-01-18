@@ -5,7 +5,12 @@ generateRandomNumber = (num) => {
 
 const prophecyObject = {
     entity: ['the dead', 'the forgotten', 'the lost', 'the silent ones'],
-    awakenings: ['ancient to wake', 'buried to rise', 'dormant to stir', 'hidden to awaken'],
+    awakenings: [
+        'ancient to wake',
+        'buried to rise',
+        'dormant to stir',
+        'hidden to awaken',
+    ],
     forces: ['by a hand', 'by a shadow', 'by a whisper', 'by a presence'],
 };
 
@@ -28,10 +33,54 @@ for (let key in prophecyObject) {
     }
 }
 
+
+function wrapText(text, width) {
+    const words = text.split(' ');
+    const lines = [];
+    let current = '';
+
+    for (const word of words) {
+        if ((current + word).length > width) {
+            lines.push(current.trim());
+            current = word + ' ';
+        } else {
+            current += word + ' ';
+        }
+    }
+
+    if (current.trim()) {
+        lines.push(current.trim());
+    }
+    return lines;
+}
+
+
 formatProphecy = (prophecyArray) => {
-    let formattedProphecy = prophecyArray.join('\n');
-    console.log(formattedProphecy);
+    const maxWidth = 27;
+
+    // Wrap each prophecy line into multiple lines
+    const wrappedLines = prophecyArray.flatMap(line => wrapText(line, maxWidth));
+
+    const formattedLines = wrappedLines
+        .map(line => `              |   ${line.padEnd(maxWidth, ' ')} |  |`)
+        .join('\n');
+
+    const book = `
+                 ________________________________
+                /                               /|
+               /                               / |
+              /_______________________________/  |
+              |                               |  |
+${formattedLines}
+              |                               |  |
+              |_______________________________|  /
+              /_______________________________/ /
+              |                               |/
+              |_______________________________|
+    `;
+
+    console.log(book);
 };
 
-formatProphecy(prophecy);
 
+formatProphecy(prophecy);

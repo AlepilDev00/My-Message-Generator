@@ -31,7 +31,8 @@ Below are the steps and thinking I used to develop the message generator
 5. Inside the loop, use the random number function to select a random string from each array in the object.
 6. Use a switch statement to customize messages based on the property being accessed, and push these messages into the prophecy array.
 7. Create a function called formatProphecy that takes the prophecy array as an argument, formats it into a readable string, and logs it to the console.
-8. Call the formatProphecy function to display the generated prophecy
+8. Create a helper function to wrap text into multiple lines if it exceeds a certain width
+9. Call the formatProphecy function to display the generated prophecy
 
 ## My version
 
